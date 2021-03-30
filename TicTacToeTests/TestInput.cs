@@ -1,19 +1,20 @@
-using System;
+using System.Collections.Generic;
 using TicTacToe;
 
 namespace TicTacToeTests
 {
     public class TestInput : IInput
     {
-        private readonly string _input;
+        private readonly List<string> _inputs;
+        private int _timesCalled;
 
-        public TestInput(string input)
+        public TestInput(List<string> inputs)
         {
-            _input = input;
+            _inputs = inputs;
         }
         public string ReadLine()
         {
-            return _input;
+            return _inputs[_timesCalled++];
         }
     }
 }

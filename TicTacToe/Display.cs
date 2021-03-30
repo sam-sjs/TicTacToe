@@ -23,10 +23,15 @@ namespace TicTacToe
             _output.WriteLine(". . .");
         }
 
-        public void AskForCoordinate()
+        public void AskForCoordinates()
         {
 
             _output.WriteLine("Player 1 enter a coord x,y to place your X or enter 'q' to give up:");
+        }
+
+        public void InvalidCoordinates()
+        {
+            _output.WriteLine("Oh no!  Those coordinates are not valid, please try again:");
         }
     }
 }

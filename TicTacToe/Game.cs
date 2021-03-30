@@ -1,4 +1,6 @@
 
+using System.Text.RegularExpressions;
+
 namespace TicTacToe
 {
     public class Game
@@ -15,8 +17,22 @@ namespace TicTacToe
         {
             Display.Welcome();
             Display.Board();
-            Display.AskForCoordinate();
-            string coord = Input.ReadLine();
+            string coords = GetCoordinates();
+        }
+
+        public string GetCoordinates()
+        {
+            string coordPattern = @"^[123],[123]$";
+            string coords;
+            Display.AskForCoordinates();
+            while (true)
+            {
+                coords = Input.ReadLine();
+                if (Regex.IsMatch(coords, coordPattern)) break;
+                Display.InvalidCoordinates();
+            }
+
+            return coords;
         }
     }
 }

@@ -43,14 +43,26 @@ namespace TicTacToeTests
         }
 
         [Fact]
-        public void AskForCoordinate()
+        public void AskForCoordinate_ShouldHaveCorrectMessage()
         {
             List<string> expected = new List<string>
                 {"Player 1 enter a coord x,y to place your X or enter 'q' to give up:"};
             TestOutput output = new TestOutput();
             Display newMessage = new Display(output);
 
-            newMessage.AskForCoordinate();
+            newMessage.AskForCoordinates();
+            
+            Assert.Equal(expected, output.Messages);
+        }
+
+        [Fact]
+        public void InvalidCoordinates_ShouldHaveCorrectMessage()
+        {
+            List<string> expected = new List<string> {"Oh no!  Those coordinates are not valid, please try again:"};
+            TestOutput output = new TestOutput();
+            Display newMessage = new Display(output);
+
+            newMessage.InvalidCoordinates();
             
             Assert.Equal(expected, output.Messages);
         }
