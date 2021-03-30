@@ -1,10 +1,10 @@
 namespace TicTacToe
 {
-    public class Message
+    public class Display
     {
         private IOutput _output;
 
-        public Message(IOutput output)
+        public Display(IOutput output)
         {
             _output = output;
         }
@@ -21,6 +21,12 @@ namespace TicTacToe
             _output.WriteLine(". . .");
             _output.WriteLine(". . .");
             _output.WriteLine(". . .");
+        }
+
+        public void AskForCoordinate()
+        {
+
+            _output.WriteLine("Player 1 enter a coord x,y to place your X or enter 'q' to give up:");
         }
     }
 }

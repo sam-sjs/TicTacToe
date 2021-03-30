@@ -3,17 +3,20 @@ namespace TicTacToe
 {
     public class Game
     {
-        public Game(Message message)
+        public Game(Display message, IInput input)
         {
-            Message = message;
+            Display = message;
+            Input = input;
         }
 
-        public Message Message { get; }
-
+        public Display Display { get; }
+        public IInput Input { get; }
         public void Play()
         {
-            Message.Welcome();
-            Message.Board();
+            Display.Welcome();
+            Display.Board();
+            Display.AskForCoordinate();
+            string coord = Input.ReadLine();
         }
     }
 }
