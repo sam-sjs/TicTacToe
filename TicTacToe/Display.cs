@@ -33,5 +33,10 @@ namespace TicTacToe
         {
             _output.WriteLine("Oh no!  Those coordinates are not valid, please try again:");
         }
-    }
+
+        public void MoveAccepted()
+        {
+            _output.WriteLine("Move accepted, here's the current board:");
+        }
+}
 }

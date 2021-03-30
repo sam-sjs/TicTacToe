@@ -66,5 +66,17 @@ namespace TicTacToeTests
             
             Assert.Equal(expected, output.Messages);
         }
+        
+        [Fact]
+        public void MoveAccepted_ShouldHaveCorrectMessage()
+        {
+            List<string> expected = new List<string> {"Move accepted, here's the current board:"};
+            TestOutput output = new TestOutput();
+            Display newMessage = new Display(output);
+
+            newMessage.MoveAccepted();
+            
+            Assert.Equal(expected, output.Messages);
+        }
     }
 }
