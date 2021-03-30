@@ -12,8 +12,8 @@ namespace TicTacToe
 
         public void Play()
         {
-            Message.DisplayWelcome();
-            
+            Message.Welcome();
+            Message.Board();
         }
     }
 }

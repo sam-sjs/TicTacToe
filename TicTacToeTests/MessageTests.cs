@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TicTacToe;
 using Xunit;
 
@@ -8,13 +9,37 @@ namespace TicTacToeTests
         [Fact]
         public void DisplayWelcome_ShouldHaveCorrectMessage()
         {
+            List<string> expectedMessages = new List<string>
+            {
+                "Welcome to Tic Tac Toe!",
+                "",
+                "Here's the current board:"
+            };
             TestOutput output = new TestOutput();
             Message newMessage = new Message(output);
-            string expected = "Welcome to Tic Tac Toe!";
+            
+            
+            newMessage.Welcome();
 
-            newMessage.DisplayWelcome();
+            Assert.Equal(expectedMessages, output.Messages);
+        }
 
-            Assert.Equal(expected, output.Message);
+        [Fact]
+        public void DisplayBoard_ShouldDisplayNineEmptyCells()
+        {
+            List<string> expected = new List<string>
+            {
+                ". . .",
+                ". . .",
+                ". . ."
+            };
+            
+            TestOutput output = new TestOutput();
+            Message newMessage = new Message(output);
+
+            newMessage.Board();
+
+            Assert.Equal(expected, output.Messages);
         }
     }
 }
