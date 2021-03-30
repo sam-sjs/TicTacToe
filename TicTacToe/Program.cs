@@ -6,7 +6,11 @@ namespace TicTacToe
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ConsoleOutput output = new ConsoleOutput();
+            Display message = new Display(output);
+            ConsoleInput input = new ConsoleInput();
+            Game game = new Game(message, input);
+            game.Play();
         }
     }
 }
