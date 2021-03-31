@@ -1,3 +1,5 @@
+using System;
+
 namespace TicTacToe
 {
     public class Board
@@ -6,9 +8,10 @@ namespace TicTacToe
 
         public Board()
         {
-            for (int i = 0; i < BoardSize; i++)
+            // Write test to check cells have unique positions
+            foreach (Location loc in Enum.GetValues(typeof(Location)))
             {
-                Cells[i] = new Cell();
+                Cells[(int)loc] = new Cell(loc);
             }
         }
         public Cell[] Cells { get; set; } = new Cell[BoardSize];

@@ -1,3 +1,4 @@
+using System.Linq;
 using TicTacToe;
 using Xunit;
 
@@ -14,6 +15,17 @@ namespace TicTacToeTests
             int actual = board.Cells.Length;
 
             Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void Board_ShouldGenerateUniqueCells()
+        {
+            Board board = new Board();
+            int numberOfCells = board.Cells.Length;
+
+            int numberOfUniqueCells = board.Cells.Distinct().Count();
+            
+            Assert.Equal(numberOfCells, numberOfUniqueCells);
         }
     }
 }
