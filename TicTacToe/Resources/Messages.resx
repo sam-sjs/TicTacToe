@@ -18,4 +18,19 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <data name="Welcome" xml:space="preserve">
+        <value>Welcome to Tic Tac Toe!</value>
+    </data>
+    <data name="AnnounceBoard" xml:space="preserve">
+        <value>Here's the current board:</value>
+    </data>
+    <data name="AskForCoords" xml:space="preserve">
+        <value> enter a coord x,y to place your X or enter 'q' to give up:</value>
+    </data>
+    <data name="InvalidCoords" xml:space="preserve">
+        <value>Oh no!  Those coordinates are not valid, please try again:</value>
+    </data>
+    <data name="MoveAccepted" xml:space="preserve">
+        <value>Move accepted, here's the current board:</value>
+    </data>
 </root>

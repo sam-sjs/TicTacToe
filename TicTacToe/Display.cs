@@ -11,9 +11,9 @@ namespace TicTacToe
 
         public void Welcome()
         {
-            _output.WriteLine("Welcome to Tic Tac Toe!");
+            _output.WriteLine(Messages.Welcome);
             _output.WriteLine();
-            _output.WriteLine("Here's the current board:");
+            _output.WriteLine(Messages.AnnounceBoard);
         }
 
         public void Board()
@@ -26,17 +26,17 @@ namespace TicTacToe
         public void AskForCoordinates()
         {
 
-            _output.WriteLine("Player 1 enter a coord x,y to place your X or enter 'q' to give up:");
+            _output.WriteLine("Player 1" + Messages.AskForCoords);
         }
 
         public void InvalidCoordinates()
         {
-            _output.WriteLine("Oh no!  Those coordinates are not valid, please try again:");
+            _output.WriteLine(Messages.InvalidCoords);
         }
 
         public void MoveAccepted()
         {
-            _output.WriteLine("Move accepted, here's the current board:");
+            _output.WriteLine(Messages.MoveAccepted);
         }
 }
 }

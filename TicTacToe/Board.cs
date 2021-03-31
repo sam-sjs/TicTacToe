@@ -8,12 +8,11 @@ namespace TicTacToe
 
         public Board()
         {
-            // Write test to check cells have unique positions
             foreach (Location loc in Enum.GetValues(typeof(Location)))
             {
                 Cells[(int)loc] = new Cell(loc);
             }
         }
-        public Cell[] Cells { get; set; } = new Cell[BoardSize];
+        public Cell[] Cells { get; } = new Cell[BoardSize];
     }
 }
