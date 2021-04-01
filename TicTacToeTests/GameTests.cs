@@ -1,6 +1,7 @@
 
 using System.Collections.Generic;
 using TicTacToe;
+using TicTacToe.Input;
 using Xunit;
 
 namespace TicTacToeTests
@@ -14,7 +15,8 @@ namespace TicTacToeTests
             TestOutput output = new TestOutput();
             Display message = new Display(output);
             TestInput input = new TestInput(inputs);
-            Game game = new Game(message, input);
+            Board board = new Board();
+            Game game = new Game(message, input, board);
             string expected = "1,2"; 
 
             string actual = game.Input.ReadLine();
@@ -37,7 +39,8 @@ namespace TicTacToeTests
             TestOutput output = new TestOutput();
             Display message = new Display(output);
             TestInput input = new TestInput(inputs);
-            Game game = new Game(message, input);
+            Board board = new Board();
+            Game game = new Game(message, input, board);
 
             string actual = game.GetCoordinates();
 
@@ -50,7 +53,8 @@ namespace TicTacToeTests
             TestOutput output = new TestOutput();
             Display message = new Display(output);
             ConsoleInput input = new();
-            Game game = new Game(message, input);
+            Board board = new Board();
+            Game game = new Game(message, input, board);
             string coordsToConvert = "1,2";
             Location expected = Location.TopMid;
 

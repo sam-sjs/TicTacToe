@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using TicTacToe.Input;
+using TicTacToe.Output;
 
 namespace TicTacToe
 {
@@ -7,9 +9,10 @@ namespace TicTacToe
         static void Main(string[] args)
         {
             ConsoleOutput output = new ConsoleOutput();
-            Display message = new Display(output);
+            Display display = new Display(output);
             ConsoleInput input = new ConsoleInput();
-            Game game = new Game(message, input);
+            Board board = new Board();
+            Game game = new Game(display, input, board);
             game.Play();
         }
     }

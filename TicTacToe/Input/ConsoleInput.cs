@@ -1,6 +1,6 @@
 using System;
 
-namespace TicTacToe
+namespace TicTacToe.Input
 {
     public class ConsoleInput : IInput
     {

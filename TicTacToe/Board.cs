@@ -14,5 +14,10 @@ namespace TicTacToe
             }
         }
         public Cell[] Cells { get; } = new Cell[BoardSize];
+
+        public Cell GetCellByLocation(Location location)
+        {
+            return Array.Find(Cells, cell => cell.Location == location);
+        }
     }
 }

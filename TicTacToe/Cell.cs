@@ -1,4 +1,6 @@
 
+using System;
+
 namespace TicTacToe
 {
     public class Cell
@@ -27,6 +29,21 @@ namespace TicTacToe
         public override int GetHashCode()
         {
             return (int) Location;
+        }
+
+        public override string ToString()
+        {
+            switch (this.Piece)
+            {
+                case Piece.Cross:
+                    return "X";
+                case Piece.Naught:
+                    return "0";
+                case Piece.Empty:
+                    return ".";
+                default:
+                    return ".";
+            }
         }
     }
 }

@@ -27,5 +27,16 @@ namespace TicTacToeTests
             
             Assert.Equal(numberOfCells, numberOfUniqueCells);
         }
+
+        [Fact]
+        public void GetPiece_GivenLocation_ShouldReturnCell()
+        {
+            Board board = new Board();
+            Cell expected = new Cell(Location.TopLeft);
+
+            Cell actual = board.GetCellByLocation(Location.TopLeft);
+
+            Assert.Equal(expected, actual);
+        }
     }
 }

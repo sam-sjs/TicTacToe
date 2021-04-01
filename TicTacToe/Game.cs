@@ -1,23 +1,26 @@
 
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using TicTacToe.Input;
 
 namespace TicTacToe
 {
     public class Game
     {
-        public Game(Display message, IInput input)
+        public Game(Display display, IInput input, Board board)
         {
-            Display = message;
+            Display = display;
             Input = input;
+            Board = board;
         }
 
         public Display Display { get; }
         public IInput Input { get; }
+        public Board Board { get; }
         public void Play()
         {
             Display.Welcome();
-            Display.Board();
+            Display.Board(Board);
             string coords = GetCoordinates();
         }
 

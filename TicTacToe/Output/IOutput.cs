@@ -1,4 +1,4 @@
-namespace TicTacToe
+namespace TicTacToe.Output
 {
     public interface IOutput
     {

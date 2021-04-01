@@ -36,8 +36,9 @@ namespace TicTacToeTests
             
             TestOutput output = new TestOutput();
             Display newMessage = new Display(output);
+            Board board = new Board();
 
-            newMessage.Board();
+            newMessage.Board(board);
 
             Assert.Equal(expected, output.Messages);
         }

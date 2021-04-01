@@ -1,4 +1,4 @@
-namespace TicTacToe
+namespace TicTacToe.Input
 {
     public interface IInput
     {
