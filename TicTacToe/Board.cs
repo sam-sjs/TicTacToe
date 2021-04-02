@@ -19,5 +19,13 @@ namespace TicTacToe
         {
             return Array.Find(Cells, cell => cell.Location == location);
         }
+
+        public override string ToString()
+        {
+            return
+                $"{GetCellByLocation(Location.TopLeft)} {GetCellByLocation(Location.TopMid)} {GetCellByLocation(Location.TopRight)}\n" +
+                $"{GetCellByLocation(Location.MidLeft)} {GetCellByLocation(Location.Centre)} {GetCellByLocation(Location.MidRight)}\n" +
+                $"{GetCellByLocation(Location.BottomLeft)} {GetCellByLocation(Location.BottomMid)} {GetCellByLocation(Location.BottomRight)}";
+        }
     }
 }

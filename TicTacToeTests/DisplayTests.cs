@@ -27,12 +27,7 @@ namespace TicTacToeTests
         [Fact]
         public void DisplayBoard_ShouldDisplayNineEmptyCells()
         {
-            List<string> expected = new List<string>
-            {
-                ". . .",
-                ". . .",
-                ". . ."
-            };
+            List<string> expected = new List<string> {". . .\n. . .\n. . ."};
             
             TestOutput output = new TestOutput();
             Display newMessage = new Display(output);

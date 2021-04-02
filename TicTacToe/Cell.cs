@@ -1,6 +1,4 @@
 
-using System;
-
 namespace TicTacToe
 {
     public class Cell
@@ -33,7 +31,7 @@ namespace TicTacToe
 
         public override string ToString()
         {
-            switch (this.Piece)
+            switch (Piece)
             {
                 case Piece.Cross:
                     return "X";
