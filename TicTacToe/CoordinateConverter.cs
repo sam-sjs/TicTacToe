@@ -21,7 +21,7 @@ namespace TicTacToe
         public Display Display { get; }
         public IInput Input { get; }
 
-        public string GetCoordinates()
+        public Location GetCoordinates()
         {
             string coordPattern = @"^[123],[123]$";
             string coords;
@@ -33,7 +33,7 @@ namespace TicTacToe
                 Display.InvalidCoordinates();
             }
 
-            return coords;
+            return ConvertCoordinates(coords);
         }
         
         public Location ConvertCoordinates(string coords)

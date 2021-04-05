@@ -21,7 +21,7 @@ namespace TicTacToe
         {
             Display.Welcome();
             Display.Board(Board);
-            string coords = Coordinates.GetCoordinates();
+            Location location = Coordinates.GetCoordinates();
         }
     }
 }
