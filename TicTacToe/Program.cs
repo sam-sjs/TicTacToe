@@ -12,7 +12,8 @@ namespace TicTacToe
             Display display = new Display(output);
             ConsoleInput input = new ConsoleInput();
             Board board = new Board();
-            Game game = new Game(display, input, board);
+            Coordinates coordinates = new Coordinates(display, input);
+            Game game = new Game(display, input, board, coordinates);
             game.Play();
         }
     }

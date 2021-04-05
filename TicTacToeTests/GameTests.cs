@@ -13,36 +13,14 @@ namespace TicTacToeTests
         {
             List<string> inputs = new List<string> {"1,2"};
             TestOutput output = new TestOutput();
-            Display message = new Display(output);
+            Display display = new Display(output);
             TestInput input = new TestInput(inputs);
+            Coordinates interpreter = new Coordinates(display, input);
             Board board = new Board();
-            Game game = new Game(message, input, board);
+            Game game = new Game(display, input, board, interpreter);
             string expected = "1,2"; 
 
             string actual = game.Input.ReadLine();
-
-            Assert.Equal(expected, actual);
-        }
-
-        public static IEnumerable<object[]> GetInputs()
-        {
-            yield return new object[] {new List<string> {"1,Q", "1,2"}, "1,2"};
-            yield return new object[] {new List<string> {"Q,2", "2,3"}, "2,3"};
-            yield return new object[] {new List<string> {"12,2", "1,1"}, "1,1"};
-            yield return new object[] {new List<string> {"1,8", "4,4", "1,2"}, "1,2"};
-        }
-        
-        [Theory]
-        [MemberData(nameof(GetInputs))]
-        public void GetCoordinate_GivenIncorrectInput_ShouldAwaitValidInput(List<string> inputs, string expected)
-        {
-            TestOutput output = new TestOutput();
-            Display message = new Display(output);
-            TestInput input = new TestInput(inputs);
-            Board board = new Board();
-            Game game = new Game(message, input, board);
-
-            string actual = game.GetCoordinates();
 
             Assert.Equal(expected, actual);
         }
@@ -51,10 +29,11 @@ namespace TicTacToeTests
         public void ConvertCoordinates_GivenString_ShouldReturnRespectiveEnum()
         {
             TestOutput output = new TestOutput();
-            Display message = new Display(output);
+            Display display = new Display(output);
             ConsoleInput input = new();
+            Coordinates interpreter = new Coordinates(display, input);
             Board board = new Board();
-            Game game = new Game(message, input, board);
+            Game game = new Game(display, input, board, interpreter);
             string coordsToConvert = "1,2";
             Location expected = Location.TopMid;
 
