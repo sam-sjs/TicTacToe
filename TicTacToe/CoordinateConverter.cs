@@ -21,19 +21,31 @@ namespace TicTacToe
         public Display Display { get; }
         public IInput Input { get; }
 
-        public Location GetCoordinates()
+        public Location GetLocation()
         {
-            string coordPattern = @"^[123],[123]$";
-            string coords;
+            string coords = GetCoordinates();
+            return ConvertCoordinates(coords);
+        }
+
+        public string GetCoordinates()
+        {
+            string coords = null;
             Display.AskForCoordinates();
-            while (true)
+            while (coords == null)
             {
-                coords = Input.ReadLine();
-                if (Regex.IsMatch(coords, coordPattern)) break;
-                Display.InvalidCoordinates();
+                coords = ValidateCoordinates();
             }
 
-            return ConvertCoordinates(coords);
+            return coords;
+        }
+
+        public string ValidateCoordinates()
+        {
+            string coordPattern = @"^[123],[123]$";
+            string coords = Input.ReadLine();
+            if (Regex.IsMatch(coords, coordPattern)) return coords;
+            Display.InvalidCoordinates();
+            return null;
         }
         
         public Location ConvertCoordinates(string coords)
