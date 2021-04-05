@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TicTacToe;
+using TicTacToe.Input;
 using Xunit;
 
 namespace TicTacToeTests
@@ -24,6 +25,21 @@ namespace TicTacToeTests
             Coordinates coordinates = new Coordinates(display, input);
 
             string actual = coordinates.GetCoordinates();
+
+            Assert.Equal(expected, actual);
+        }
+        
+        [Fact]
+        public void ConvertCoordinates_GivenStringCoords_ShouldReturnLocation()
+        {
+            TestOutput output = new TestOutput();
+            Display display = new Display(output);
+            ConsoleInput input = new();
+            Coordinates coordinates = new Coordinates(display, input);
+            string coordsToConvert = "1,2";
+            Location expected = Location.TopMid;
+
+            Location actual = coordinates.ConvertCoordinates(coordsToConvert);
 
             Assert.Equal(expected, actual);
         }
