@@ -29,7 +29,7 @@ namespace TicTacToeTests
         }
 
         [Fact]
-        public void GetPiece_GivenLocation_ShouldReturnCell()
+        public void GetCellByLocation_GivenLocation_ShouldReturnCell()
         {
             Board board = new Board();
             Cell expected = new Cell(Location.TopLeft);
