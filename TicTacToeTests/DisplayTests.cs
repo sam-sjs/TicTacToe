@@ -41,12 +41,13 @@ namespace TicTacToeTests
         [Fact]
         public void AskForCoordinate_ShouldHaveCorrectMessage()
         {
+            string input = "Player 1";
             List<string> expected = new List<string>
-                {"Player 1 enter a coord x,y to place your X or enter 'q' to give up:"};
+                {$"{input} enter a coord x,y to place your X or enter 'q' to give up:"};
             TestOutput output = new TestOutput();
             Display newMessage = new Display(output);
 
-            newMessage.AskForCoordinates();
+            newMessage.AskForCoordinates(input);
             
             Assert.Equal(expected, output.Messages);
         }

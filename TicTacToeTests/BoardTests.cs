@@ -38,5 +38,18 @@ namespace TicTacToeTests
 
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void PlacePiece_GivenLocationAndPiece_ShouldUpdateCellWithGivenPiece()
+        {
+            Board board = new Board();
+            Location location = Location.TopLeft;
+            Piece piece = Piece.Cross;
+
+            board.PlacePiece(location, piece);
+            Cell cell = board.GetCellByLocation(location);
+            
+            Assert.Equal(piece, cell.Piece);
+        }
     }
 }

@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using TicTacToe;
 using TicTacToe.Input;
 
-namespace TicTacToeTests
+namespace TicTacToeTests.Input
 {
     public class TestInput : IInput
     {

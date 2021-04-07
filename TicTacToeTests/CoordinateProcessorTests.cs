@@ -1,5 +1,4 @@
 using TicTacToe;
-using TicTacToe.Input;
 using Xunit;
 
 namespace TicTacToeTests

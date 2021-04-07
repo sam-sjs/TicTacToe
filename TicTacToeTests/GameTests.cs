@@ -1,9 +1,8 @@
 
 using System.Collections.Generic;
 using TicTacToe;
-using TicTacToe.Input;
+using TicTacToeTests.Input;
 using Xunit;
-using Xunit.Sdk;
 
 namespace TicTacToeTests
 {
