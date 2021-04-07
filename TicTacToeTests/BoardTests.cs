@@ -44,12 +44,12 @@ namespace TicTacToeTests
         {
             Board board = new Board();
             Location location = Location.TopLeft;
-            Piece piece = Piece.Cross;
+            Token token = Token.Cross;
 
-            board.PlacePiece(location, piece);
+            board.PlacePiece(location, token);
             Cell cell = board.GetCellByLocation(location);
             
-            Assert.Equal(piece, cell.Piece);
+            Assert.Equal(token, cell.Token);
         }
     }
 }

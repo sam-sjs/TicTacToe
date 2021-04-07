@@ -9,7 +9,7 @@ namespace TicTacToe
         }
 
         public Location Location { get; }
-        public Piece Piece { get; set; } = Piece.Empty;
+        public Token Token { get; set; } = Token.Empty;
 
         protected bool Equals(Cell other)
         {
@@ -31,13 +31,13 @@ namespace TicTacToe
 
         public override string ToString()
         {
-            switch (Piece)
+            switch (Token)
             {
-                case Piece.Cross:
+                case Token.Cross:
                     return "X";
-                case Piece.Naught:
+                case Token.Naught:
                     return "0";
-                case Piece.Empty:
+                case Token.Empty:
                     return ".";
                 default:
                     return ".";

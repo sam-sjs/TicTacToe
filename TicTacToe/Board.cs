@@ -20,10 +20,10 @@ namespace TicTacToe
             return Array.Find(Cells, cell => cell.Location == location);
         }
 
-        public void PlacePiece(Location location, Piece piece)
+        public void PlacePiece(Location location, Token token)
         {
             Cell cell = GetCellByLocation(location);
-            cell.Piece = piece;
+            cell.Token = token;
         }
 
         public override string ToString()

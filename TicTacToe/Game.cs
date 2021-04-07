@@ -5,19 +5,22 @@ namespace TicTacToe
 {
     public class Game
     {
-        private const string Player1 = "Player 1";
         public Game(Display display, IInput input, Board board, CoordinateProcessor processor)
         {
             Display = display;
             Input = input;
             Board = board;
             Processor = processor;
+            Player1 = new Player("Player 1", Token.Cross);
+            Player2 = new Player("Player 2", Token.Naught);
         }
 
         public Display Display { get; }
         public IInput Input { get; }
         public Board Board { get; }
         public CoordinateProcessor Processor { get; }
+        public Player Player1 { get; }
+        public Player Player2 { get; }
         public void Play()
         {
             DisplayOpeningMessages();
@@ -32,8 +35,8 @@ namespace TicTacToe
         
         public void TakeTurn()
         {
-            Display.AskForCoordinates(Player1); // Maybe player should be a class knowing its piece as have to keep it in lockstep.
-            Board.PlacePiece(GetLocation(), Piece.Cross);
+            Display.AskForCoordinates(Player1.Name);
+            Board.PlacePiece(GetLocation(), Token.Cross); // Now have pieces stored in Player
             Display.MoveAccepted();
             Display.Board(Board);
         }
