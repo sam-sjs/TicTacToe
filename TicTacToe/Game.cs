@@ -5,11 +5,11 @@ namespace TicTacToe
 {
     public class Game
     {
-        public Game(Display display, IInput input, Board board, CoordinateProcessor processor)
+        public Game(Display display, IInput input, CoordinateProcessor processor)
         {
             Display = display;
             Input = input;
-            Board = board;
+            Board = new Board();
             Processor = processor;
             Player1 = new Player("Player 1", Token.Cross);
             Player2 = new Player("Player 2", Token.Naught);
@@ -35,7 +35,7 @@ namespace TicTacToe
         
         public void TakeTurn()
         {
-            Display.AskForCoordinates(Player1.Name);
+            Display.AskForCoordinates(Player1.Name); // Pass Player into TakeTurn()
             Board.PlacePiece(GetLocation(), Token.Cross); // Now have pieces stored in Player
             Display.MoveAccepted();
             Display.Board(Board);

@@ -1,23 +1,29 @@
 
+using System;
 using System.Collections.Generic;
 using TicTacToe;
 using TicTacToeTests.Input;
+using TicTacToeTests.Output;
 using Xunit;
 
 namespace TicTacToeTests
 {
     public class GameTests
     {
+        private readonly TestOutput _output;
+        public GameTests()
+        {
+            _output = new TestOutput();
+        }
+
         [Fact]
         public void Game_ShouldHavePlayer1()
         {
             List<string> inputs = new List<string> {"1,2"};
-            TestOutput output = new TestOutput();
-            Display display = new Display(output);
+            Display display = new Display(_output);
             TestInput input = new TestInput(inputs);
             CoordinateProcessor processor = new CoordinateProcessor();
-            Board board = new Board();
-            Game game = new Game(display, input, board, processor);
+            Game game = new Game(display, input, processor);
             string expected = "Player 1";
 
             string actual = game.Player1.Name;
@@ -29,12 +35,10 @@ namespace TicTacToeTests
         public void Game_ShouldHavePlayer2()
         {
             List<string> inputs = new List<string> {"1,2"};
-            TestOutput output = new TestOutput();
-            Display display = new Display(output);
+            Display display = new Display(_output);
             TestInput input = new TestInput(inputs);
             CoordinateProcessor processor = new CoordinateProcessor();
-            Board board = new Board();
-            Game game = new Game(display, input, board, processor);
+            Game game = new Game(display, input, processor);
             string expected = "Player 2";
 
             string actual = game.Player2.Name;
@@ -47,26 +51,22 @@ namespace TicTacToeTests
         public void Game_PlayersShouldHaveUniqueTokens()
         {
             List<string> inputs = new List<string> {"1,2"};
-            TestOutput output = new TestOutput();
-            Display display = new Display(output);
+            Display display = new Display(_output);
             TestInput input = new TestInput(inputs);
             CoordinateProcessor processor = new CoordinateProcessor();
-            Board board = new Board();
-            Game game = new Game(display, input, board, processor);
+            Game game = new Game(display, input, processor);
             
             Assert.NotEqual(game.Player1.Token, game.Player2.Token);
         }
-
+        
         [Fact]
         public void GetLocation_GivenStringCoordinates_ShouldReturnLocation()
         {
             List<string> inputs = new List<string> {"1,2"};
-            TestOutput output = new TestOutput();
-            Display display = new Display(output);
+            Display display = new Display(_output);
             TestInput input = new TestInput(inputs);
             CoordinateProcessor processor = new CoordinateProcessor();
-            Board board = new Board();
-            Game game = new Game(display, input, board, processor);
+            Game game = new Game(display, input, processor);
             Location expected = Location.TopMid;
 
             Location actual = game.GetLocation();
@@ -86,12 +86,10 @@ namespace TicTacToeTests
         [MemberData(nameof(GetInputs))]
         public void GetLocation_GivenInvalidCoordinates_AwaitValidCoordinates(List<string> inputs, Location expected)
         {
-            TestOutput output = new TestOutput();
-            Display display = new Display(output);
+            Display display = new Display(_output);
             TestInput input = new TestInput(inputs);
             CoordinateProcessor processor = new CoordinateProcessor();
-            Board board = new Board();
-            Game game = new Game(display, input, board, processor);
+            Game game = new Game(display, input, processor);
 
             Location actual = game.GetLocation();
             
@@ -102,12 +100,10 @@ namespace TicTacToeTests
         public void ReadLine_ShouldReturnExpectedString()
         {
             List<string> inputs = new List<string> {"1,2"};
-            TestOutput output = new TestOutput();
-            Display display = new Display(output);
+            Display display = new Display(_output);
             TestInput input = new TestInput(inputs);
             CoordinateProcessor processor = new CoordinateProcessor();
-            Board board = new Board();
-            Game game = new Game(display, input, board, processor);
+            Game game = new Game(display, input, processor);
             string expected = "1,2"; 
 
             string actual = game.Input.ReadLine();

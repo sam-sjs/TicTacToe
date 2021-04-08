@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TicTacToe;
+using TicTacToeTests.Output;
 using Xunit;
 
 namespace TicTacToeTests
