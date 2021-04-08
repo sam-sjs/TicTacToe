@@ -24,19 +24,19 @@ namespace TicTacToe
         public void Play()
         {
             DisplayOpeningMessages();
-            TakeTurn();
+            TakeTurn(Player1);
         }
 
-        public void DisplayOpeningMessages()
+        private void DisplayOpeningMessages()
         {
             Display.Welcome();
             Display.Board(Board);
         }
         
-        public void TakeTurn()
+        private void TakeTurn(Player player)
         {
-            Display.AskForCoordinates(Player1.Name); // Pass Player into TakeTurn()
-            Board.PlacePiece(GetLocation(), Token.Cross); // Now have pieces stored in Player
+            Display.AskForCoordinates(player.Name);
+            Board.PlacePiece(GetLocation(), player.Token);
             Display.MoveAccepted();
             Display.Board(Board);
         }

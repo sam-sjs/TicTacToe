@@ -51,5 +51,133 @@ namespace TicTacToeTests
             
             Assert.Equal(token, cell.Token);
         }
+
+        [Theory]
+        [InlineData(Token.Empty, Token.Empty, Token.Empty)]
+        [InlineData(Token.Cross, Token.Naught, Token.Empty)]
+        public void GetTopLine_ShouldReturnArrayOfTopRowTokens(Token token1, Token token2, Token token3)
+        {
+            Board board = new Board();
+            board.PlacePiece(Location.TopLeft, token1);
+            board.PlacePiece(Location.TopMid, token2);
+            board.PlacePiece(Location.TopRight, token3);
+            Token[] expected = new Token[] {token1, token2, token3};
+            
+            Token[] actual = board.GetTopLine();
+            
+            Assert.Equal(expected, actual);
+        }
+        
+        [Theory]
+        [InlineData(Token.Empty, Token.Empty, Token.Empty)]
+        [InlineData(Token.Cross, Token.Naught, Token.Empty)]
+        public void GetHorizontalMidLine_ShouldReturnArrayOfHorizontalMidRowTokens(Token token1, Token token2, Token token3)
+        {
+            Board board = new Board();
+            board.PlacePiece(Location.MidLeft, token1);
+            board.PlacePiece(Location.Centre, token2);
+            board.PlacePiece(Location.MidRight, token3);
+            Token[] expected = new Token[] {token1, token2, token3};
+            
+            Token[] actual = board.GetHorizontalMidLine();
+            
+            Assert.Equal(expected, actual);
+        }
+        
+        [Theory]
+        [InlineData(Token.Empty, Token.Empty, Token.Empty)]
+        [InlineData(Token.Cross, Token.Naught, Token.Empty)]
+        public void GetBottomLine_ShouldReturnArrayOfBottomRowTokens(Token token1, Token token2, Token token3)
+        {
+            Board board = new Board();
+            board.PlacePiece(Location.BottomLeft, token1);
+            board.PlacePiece(Location.BottomMid, token2);
+            board.PlacePiece(Location.BottomRight, token3);
+            Token[] expected = new Token[] {token1, token2, token3};
+            
+            Token[] actual = board.GetBottomLine();
+            
+            Assert.Equal(expected, actual);
+        }
+        
+        [Theory]
+        [InlineData(Token.Empty, Token.Empty, Token.Empty)]
+        [InlineData(Token.Cross, Token.Naught, Token.Empty)]
+        public void GetLeftLine_ShouldReturnArrayOfLeftColTokens(Token token1, Token token2, Token token3)
+        {
+            Board board = new Board();
+            board.PlacePiece(Location.TopLeft, token1);
+            board.PlacePiece(Location.MidLeft, token2);
+            board.PlacePiece(Location.BottomLeft, token3);
+            Token[] expected = new Token[] {token1, token2, token3};
+            
+            Token[] actual = board.GetLeftLine();
+            
+            Assert.Equal(expected, actual);
+        }
+        
+        [Theory]
+        [InlineData(Token.Empty, Token.Empty, Token.Empty)]
+        [InlineData(Token.Cross, Token.Naught, Token.Empty)]
+        public void GetVerticalMidLine_ShouldReturnArrayOfVerticalMidColTokens(Token token1, Token token2, Token token3)
+        {
+            Board board = new Board();
+            board.PlacePiece(Location.TopMid, token1);
+            board.PlacePiece(Location.Centre, token2);
+            board.PlacePiece(Location.BottomMid, token3);
+            Token[] expected = new Token[] {token1, token2, token3};
+            
+            Token[] actual = board.GetVerticalMidLine();
+            
+            Assert.Equal(expected, actual);
+        }
+        
+        [Theory]
+        [InlineData(Token.Empty, Token.Empty, Token.Empty)]
+        [InlineData(Token.Cross, Token.Naught, Token.Empty)]
+        public void GetRightLine_ShouldReturnArrayOfRightColTokens(Token token1, Token token2, Token token3)
+        {
+            Board board = new Board();
+            board.PlacePiece(Location.TopRight, token1);
+            board.PlacePiece(Location.MidRight, token2);
+            board.PlacePiece(Location.BottomRight, token3);
+            Token[] expected = new Token[] {token1, token2, token3};
+            
+            Token[] actual = board.GetRightLine();
+            
+            Assert.Equal(expected, actual);
+        }
+        
+        [Theory]
+        [InlineData(Token.Empty, Token.Empty, Token.Empty)]
+        [InlineData(Token.Cross, Token.Naught, Token.Empty)]
+        public void GetTopLeftToBottomRightLine_ShouldReturnArrayOfDiagonalTokens(Token token1, Token token2, Token token3)
+        {
+            Board board = new Board();
+            board.PlacePiece(Location.TopLeft, token1);
+            board.PlacePiece(Location.Centre, token2);
+            board.PlacePiece(Location.BottomRight, token3);
+            Token[] expected = new Token[] {token1, token2, token3};
+            
+            Token[] actual = board.GetTopLeftToBottomRightLine();
+            
+            Assert.Equal(expected, actual);
+        }
+        
+        [Theory]
+        [InlineData(Token.Empty, Token.Empty, Token.Empty)]
+        [InlineData(Token.Cross, Token.Naught, Token.Empty)]
+        public void GetTopRightToBottomLeftLine_ShouldReturnArrayOfDiagonalTokens(Token token1, Token token2, Token token3)
+        {
+            Board board = new Board();
+            board.PlacePiece(Location.TopRight, token1);
+            board.PlacePiece(Location.Centre, token2);
+            board.PlacePiece(Location.BottomLeft, token3);
+            Token[] expected = new Token[] {token1, token2, token3};
+            
+            Token[] actual = board.GetTopRightToBottomLeftLine();
+            
+            Assert.Equal(expected, actual);
+        }
     }
 }

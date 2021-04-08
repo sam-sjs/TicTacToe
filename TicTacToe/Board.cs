@@ -26,6 +26,86 @@ namespace TicTacToe
             cell.Token = token;
         }
 
+        public Token[] GetTopLine()
+        {
+            return new[]
+            {
+                GetCellByLocation(Location.TopLeft).Token,
+                GetCellByLocation(Location.TopMid).Token,
+                GetCellByLocation(Location.TopRight).Token
+            };
+        }
+        
+        public Token[] GetHorizontalMidLine()
+        {
+            return new[]
+            {
+                GetCellByLocation(Location.MidLeft).Token,
+                GetCellByLocation(Location.Centre).Token,
+                GetCellByLocation(Location.MidRight).Token
+            };
+        }
+        
+        public Token[] GetBottomLine()
+        {
+            return new[]
+            {
+                GetCellByLocation(Location.BottomLeft).Token,
+                GetCellByLocation(Location.BottomMid).Token,
+                GetCellByLocation(Location.BottomRight).Token
+            };
+        }
+        
+        public Token[] GetLeftLine()
+        {
+            return new[]
+            {
+                GetCellByLocation(Location.TopLeft).Token,
+                GetCellByLocation(Location.MidLeft).Token,
+                GetCellByLocation(Location.BottomRight).Token
+            };
+        }
+        
+        public Token[] GetVerticalMidLine()
+        {
+            return new[]
+            {
+                GetCellByLocation(Location.TopMid).Token,
+                GetCellByLocation(Location.Centre).Token,
+                GetCellByLocation(Location.BottomMid).Token
+            };
+        }
+        
+        public Token[] GetRightLine()
+        {
+            return new[]
+            {
+                GetCellByLocation(Location.TopRight).Token,
+                GetCellByLocation(Location.MidRight).Token,
+                GetCellByLocation(Location.BottomRight).Token
+            };
+        }
+        
+        public Token[] GetTopLeftToBottomRightLine()
+        {
+            return new[]
+            {
+                GetCellByLocation(Location.TopLeft).Token,
+                GetCellByLocation(Location.Centre).Token,
+                GetCellByLocation(Location.BottomRight).Token
+            };
+        }
+        
+        public Token[] GetTopRightToBottomLeftLine()
+        {
+            return new[]
+            {
+                GetCellByLocation(Location.TopRight).Token,
+                GetCellByLocation(Location.Centre).Token,
+                GetCellByLocation(Location.BottomLeft).Token
+            };
+        }
+        
         public override string ToString()
         {
             return
