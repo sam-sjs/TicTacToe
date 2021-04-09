@@ -57,6 +57,13 @@ namespace TicTacToe
             return Processor.ConvertCoordinates(coords);
         }
 
+        public bool CheckForWin()
+        {
+            return CheckForHorizontalWin() ||
+                   CheckForVerticalWin() ||
+                   CheckForDiagonalWin();
+        }
+
         public bool CheckForHorizontalWin()
         {
             return CheckLineForWin(Board.GetTopLine()) ||
@@ -69,6 +76,12 @@ namespace TicTacToe
             return CheckLineForWin(Board.GetLeftLine()) ||
                    CheckLineForWin(Board.GetVerticalMidLine()) ||
                    CheckLineForWin(Board.GetRightLine());
+        }
+
+        public bool CheckForDiagonalWin()
+        {
+            return CheckLineForWin(Board.GetTopLeftToBottomRightLine()) ||
+                   CheckLineForWin(Board.GetTopRightToBottomLeftLine());
         }
 
         public bool CheckLineForWin(Token[] line)

@@ -162,5 +162,40 @@ namespace TicTacToeTests
             
             Assert.Equal(expected, actual);
         }
+        
+        [Theory]
+        [InlineData(Location.TopLeft, Location.Centre, Location.BottomRight, true)]
+        [InlineData(Location.TopRight, Location.Centre, Location.BottomLeft, true)]
+        [InlineData(Location.TopLeft, Location.TopMid, Location.TopRight, false)]
+        public void CheckForDiagonalWin(Location loc1, Location loc2, Location loc3, bool expected)
+        {
+            ConsoleInput input = new ConsoleInput();
+            Game game = new Game(_display, input, _processor);
+            game.Board.PlacePiece(loc1, Token.Cross);
+            game.Board.PlacePiece(loc2, Token.Cross);
+            game.Board.PlacePiece(loc3, Token.Cross);
+
+            bool actual = game.CheckForDiagonalWin();
+            
+            Assert.Equal(expected, actual);
+        }
+        
+        [Theory]
+        [InlineData(Location.TopLeft, Location.Centre, Location.BottomRight, true)]
+        [InlineData(Location.TopRight, Location.MidRight, Location.BottomRight, true)]
+        [InlineData(Location.TopLeft, Location.TopMid, Location.TopRight, true)]
+        [InlineData(Location.TopLeft, Location.Centre, Location.BottomLeft, false)]
+        public void CheckForWin(Location loc1, Location loc2, Location loc3, bool expected)
+        {
+            ConsoleInput input = new ConsoleInput();
+            Game game = new Game(_display, input, _processor);
+            game.Board.PlacePiece(loc1, Token.Cross);
+            game.Board.PlacePiece(loc2, Token.Cross);
+            game.Board.PlacePiece(loc3, Token.Cross);
+
+            bool actual = game.CheckForWin();
+            
+            Assert.Equal(expected, actual);
+        }
     }
 }
