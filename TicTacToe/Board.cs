@@ -62,7 +62,7 @@ namespace TicTacToe
             {
                 GetCellByLocation(Location.TopLeft).Token,
                 GetCellByLocation(Location.MidLeft).Token,
-                GetCellByLocation(Location.BottomRight).Token
+                GetCellByLocation(Location.BottomLeft).Token
             };
         }
         

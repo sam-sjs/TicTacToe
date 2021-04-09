@@ -64,6 +64,13 @@ namespace TicTacToe
                    CheckLineForWin(Board.GetBottomLine());
         }
 
+        public bool CheckForVerticalWin()
+        {
+            return CheckLineForWin(Board.GetLeftLine()) ||
+                   CheckLineForWin(Board.GetVerticalMidLine()) ||
+                   CheckLineForWin(Board.GetRightLine());
+        }
+
         public bool CheckLineForWin(Token[] line)
         {
             Token first = line.First();

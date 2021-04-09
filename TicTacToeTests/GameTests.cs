@@ -6,8 +6,9 @@ using Microsoft.VisualBasic.CompilerServices;
 using TicTacToe;
 using TicTacToe.Input;
 using TicTacToeTests.Input;
-using TicTacToeTests.Output;
 using Xunit;
+using Xunit.Sdk;
+using TestOutput = TicTacToeTests.Output.TestOutput;
 
 namespace TicTacToeTests
 {
@@ -141,6 +142,23 @@ namespace TicTacToeTests
             game.Board.PlacePiece(loc3, Token.Cross);
 
             bool actual = game.CheckForHorizontalWin();
+            
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(Location.TopLeft, Location.MidLeft, Location.BottomLeft, true)]
+        [InlineData(Location.TopRight, Location.MidRight, Location.BottomRight, true)]
+        [InlineData(Location.TopLeft, Location.TopMid, Location.TopRight, false)]
+        public void CheckForVerticalWin(Location loc1, Location loc2, Location loc3, bool expected)
+        {
+            ConsoleInput input = new ConsoleInput();
+            Game game = new Game(_display, input, _processor);
+            game.Board.PlacePiece(loc1, Token.Cross);
+            game.Board.PlacePiece(loc2, Token.Cross);
+            game.Board.PlacePiece(loc3, Token.Cross);
+
+            bool actual = game.CheckForVerticalWin();
             
             Assert.Equal(expected, actual);
         }
