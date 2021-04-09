@@ -1,4 +1,6 @@
 
+using System.Collections.Generic;
+using System.Linq;
 using TicTacToe.Input;
 
 namespace TicTacToe
@@ -21,6 +23,7 @@ namespace TicTacToe
         public CoordinateProcessor Processor { get; }
         public Player Player1 { get; }
         public Player Player2 { get; }
+
         public void Play()
         {
             DisplayOpeningMessages();
@@ -32,7 +35,7 @@ namespace TicTacToe
             Display.Welcome();
             Display.Board(Board);
         }
-        
+
         private void TakeTurn(Player player)
         {
             Display.AskForCoordinates(player.Name);
@@ -50,8 +53,21 @@ namespace TicTacToe
                 if (Processor.ValidateCoordinates(coords)) break;
                 Display.InvalidCoordinates();
             }
-            
+
             return Processor.ConvertCoordinates(coords);
+        }
+
+        public bool CheckForHorizontalWin()
+        {
+            return CheckLineForWin(Board.GetTopLine()) ||
+                   CheckLineForWin(Board.GetHorizontalMidLine()) ||
+                   CheckLineForWin(Board.GetBottomLine());
+        }
+
+        public bool CheckLineForWin(Token[] line)
+        {
+            Token first = line.First();
+            return line.All(token => token == first && first != Token.Empty);
         }
     }
 }

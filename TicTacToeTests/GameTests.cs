@@ -1,6 +1,10 @@
 
+using System;
 using System.Collections.Generic;
+using System.Resources;
+using Microsoft.VisualBasic.CompilerServices;
 using TicTacToe;
+using TicTacToe.Input;
 using TicTacToeTests.Input;
 using TicTacToeTests.Output;
 using Xunit;
@@ -21,8 +25,7 @@ namespace TicTacToeTests
         [Fact]
         public void Game_ShouldHavePlayer1()
         {
-            List<string> inputs = new List<string> {"1,2"};
-            TestInput input = new TestInput(inputs);
+            ConsoleInput input = new ConsoleInput();
             Game game = new Game(_display, input, _processor);
             string expected = "Player 1";
 
@@ -34,8 +37,7 @@ namespace TicTacToeTests
         [Fact]
         public void Game_ShouldHavePlayer2()
         {
-            List<string> inputs = new List<string> {"1,2"};
-            TestInput input = new TestInput(inputs);
+            ConsoleInput input = new ConsoleInput();
             Game game = new Game(_display, input, _processor);
             string expected = "Player 2";
 
@@ -48,8 +50,7 @@ namespace TicTacToeTests
 
         public void Game_PlayersShouldHaveUniqueTokens()
         {
-            List<string> inputs = new List<string> {"1,2"};
-            TestInput input = new TestInput(inputs);
+            ConsoleInput input = new ConsoleInput();
             Game game = new Game(_display, input, _processor);
             
             Assert.NotEqual(game.Player1.Token, game.Player2.Token);
@@ -101,17 +102,47 @@ namespace TicTacToeTests
             Assert.Equal(expected, actual);
         }
 
-        // [Fact]
-        // public void CheckHorizontalWin_WhenThreeMatchingTokensInARow_ShouldReturnTrue()
-        // {
-        //     List<string> inputs = new List<string> {"1,2"}; // This input is going to break a bunch of tests once we have two players
-        //     TestInput input = new TestInput(inputs);
-        //     Game game = new Game(_display, input, _processor);
-        //     game.Board.PlacePiece(Location.TopLeft, Token.Cross);
-        //     game.Board.PlacePiece(Location.TopMid, Token.Cross);
-        //     game.Board.PlacePiece(Location.TopRight, Token.Cross);
-        //     
-        //     Assert.True(game.CheckHorizontalWin());
-        // }
+        [Theory]
+        [InlineData(new[] {Token.Cross, Token.Cross, Token.Cross}, true)]
+        [InlineData(new[] {Token.Cross, Token.Naught, Token.Empty}, false)]
+        public void CheckLineForWin_ShouldReturnTrueOnAllMatching(Token[] testRow, bool expected)
+        {
+            ConsoleInput input = new ConsoleInput();
+            Game game = new Game(_display, input, _processor);
+        
+            bool actual = game.CheckLineForWin(testRow);
+        
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void CheckLineForWin_ShouldReturnFalseOnEmpty()
+        {
+            Token[] testRow = {Token.Empty, Token.Empty, Token.Empty};
+            ConsoleInput input = new ConsoleInput();
+            Game game = new Game(_display, input, _processor);
+            bool expected = false;
+        
+            bool actual = game.CheckLineForWin(testRow);
+        
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(Location.TopLeft, Location.TopMid, Location.TopRight, true)]
+        [InlineData(Location.MidLeft, Location.Centre, Location.MidRight, true)]
+        [InlineData(Location.TopLeft, Location.MidLeft, Location.BottomLeft, false)]
+        public void CheckForHorizontalWin(Location loc1, Location loc2, Location loc3, bool expected)
+        {
+            ConsoleInput input = new ConsoleInput();
+            Game game = new Game(_display, input, _processor);
+            game.Board.PlacePiece(loc1, Token.Cross);
+            game.Board.PlacePiece(loc2, Token.Cross);
+            game.Board.PlacePiece(loc3, Token.Cross);
+
+            bool actual = game.CheckForHorizontalWin();
+            
+            Assert.Equal(expected, actual);
+        }
     }
 }
