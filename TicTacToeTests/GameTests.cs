@@ -1,14 +1,10 @@
 
-using System;
 using System.Collections.Generic;
-using System.Resources;
-using Microsoft.VisualBasic.CompilerServices;
 using TicTacToe;
 using TicTacToe.Input;
 using TicTacToeTests.Input;
+using TicTacToeTests.Output;
 using Xunit;
-using Xunit.Sdk;
-using TestOutput = TicTacToeTests.Output.TestOutput;
 
 namespace TicTacToeTests
 {
@@ -195,6 +191,18 @@ namespace TicTacToeTests
 
             bool actual = game.CheckForWin();
             
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void GetCurrentPlayer_GivenTurnCount_ShouldReturnCurrentTurnsPlayer()
+        {
+            ConsoleInput input = new ConsoleInput();
+            Game game = new Game(_display, input, _processor);
+            Player expected = game.Player1;
+
+            Player actual = game.GetCurrentPlayer();
+
             Assert.Equal(expected, actual);
         }
     }

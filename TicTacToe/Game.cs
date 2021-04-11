@@ -1,5 +1,4 @@
 
-using System.Collections.Generic;
 using System.Linq;
 using TicTacToe.Input;
 
@@ -7,6 +6,7 @@ namespace TicTacToe
 {
     public class Game
     {
+        private int _gameTurn = 0;
         public Game(Display display, IInput input, CoordinateProcessor processor)
         {
             Display = display;
@@ -27,7 +27,7 @@ namespace TicTacToe
         public void Play()
         {
             DisplayOpeningMessages();
-            TakeTurn(Player1);
+            AlternateTurns();
         }
 
         private void DisplayOpeningMessages()
@@ -36,25 +36,13 @@ namespace TicTacToe
             Display.Board(Board);
         }
 
-        private void TakeTurn(Player player)
+        private void AlternateTurns() // This seems insane to try and test, without testing an entire game of inputs and outputs it will just hang in the loop
         {
-            Display.AskForCoordinates(player.Name);
-            Board.PlacePiece(GetLocation(), player.Token);
-            Display.MoveAccepted();
-            Display.Board(Board);
-        }
-
-        public Location GetLocation()
-        {
-            string coords;
-            while (true)
+            while (!CheckForWin())
             {
-                coords = Input.ReadLine();
-                if (Processor.ValidateCoordinates(coords)) break;
-                Display.InvalidCoordinates();
+                TakeTurn(GetCurrentPlayer());
+                _gameTurn++;
             }
-
-            return Processor.ConvertCoordinates(coords);
         }
 
         public bool CheckForWin()
@@ -71,6 +59,12 @@ namespace TicTacToe
                    CheckLineForWin(Board.GetBottomLine());
         }
 
+        public bool CheckLineForWin(Token[] line)
+        {
+            Token first = line.First();
+            return line.All(token => token == first && first != Token.Empty);
+        }
+
         public bool CheckForVerticalWin()
         {
             return CheckLineForWin(Board.GetLeftLine()) ||
@@ -84,10 +78,30 @@ namespace TicTacToe
                    CheckLineForWin(Board.GetTopRightToBottomLeftLine());
         }
 
-        public bool CheckLineForWin(Token[] line)
+        private void TakeTurn(Player player)
         {
-            Token first = line.First();
-            return line.All(token => token == first && first != Token.Empty);
+            Display.AskForCoordinates(player);
+            Board.PlacePiece(GetLocation(), player.Token);
+            Display.MoveAccepted();
+            Display.Board(Board);
+        }
+
+        public Player GetCurrentPlayer()
+        {
+            return _gameTurn % 2 == 0 ? Player1 : Player2;
+        }
+
+        public Location GetLocation()
+        {
+            string coords;
+            while (true)
+            {
+                coords = Input.ReadLine();
+                if (Processor.ValidateCoordinates(coords)) break;
+                Display.InvalidCoordinates();
+            }
+
+            return Processor.ConvertCoordinates(coords);
         }
     }
 }

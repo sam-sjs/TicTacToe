@@ -23,10 +23,10 @@ namespace TicTacToe
             _output.WriteLine(board.ToString());
         }
 
-        public void AskForCoordinates(string player)
+        public void AskForCoordinates(Player player)
         {
 
-            _output.WriteLine(player + Messages.AskForCoords);
+            _output.WriteLine(Messages.AskForCoords, player.Name, player.Token.ToString());
         }
 
         public void InvalidCoordinates()
@@ -37,6 +37,11 @@ namespace TicTacToe
         public void MoveAccepted()
         {
             _output.WriteLine(Messages.MoveAccepted);
+        }
+
+        public void Winner()
+        {
+            _output.WriteLine(Messages.Winner);
         }
     }
 }

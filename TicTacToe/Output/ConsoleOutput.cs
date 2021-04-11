@@ -12,5 +12,10 @@ namespace TicTacToe.Output
         {
             Console.WriteLine(message);
         }
+
+        public void WriteLine(string template, string arg1, string arg2)
+        {
+            Console.WriteLine(template, arg1, arg2);
+        }
     }
 }

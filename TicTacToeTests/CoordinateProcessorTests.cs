@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using TicTacToe;
 using Xunit;
 
@@ -17,7 +19,7 @@ namespace TicTacToeTests
             
             Assert.Equal(expected, actual);
         }
-        
+
         [Fact]
         public void ConvertCoordinates_GivenStringCoords_ShouldReturnLocation()
         {

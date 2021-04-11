@@ -25,12 +25,15 @@
         <value>Here's the current board:</value>
     </data>
     <data name="AskForCoords" xml:space="preserve">
-        <value> enter a coord x,y to place your X or enter 'q' to give up:</value>
+        <value>{0} enter a coord x,y to place your {1} or enter 'q' to give up:</value>
     </data>
     <data name="InvalidCoords" xml:space="preserve">
         <value>Oh no!  Those coordinates are not valid, please try again:</value>
     </data>
     <data name="MoveAccepted" xml:space="preserve">
         <value>Move accepted, here's the current board:</value>
+    </data>
+    <data name="Winner" xml:space="preserve">
+        <value>Move accepted, well done you've won the game!</value>
     </data>
 </root>

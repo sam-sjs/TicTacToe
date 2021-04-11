@@ -11,7 +11,6 @@ namespace TicTacToe
             ConsoleOutput output = new ConsoleOutput();
             Display display = new Display(output);
             ConsoleInput input = new ConsoleInput();
-            Board board = new Board();
             CoordinateProcessor processor = new CoordinateProcessor();
             Game game = new Game(display, input, processor);
             game.Play();
