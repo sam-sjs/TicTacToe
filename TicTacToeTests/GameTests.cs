@@ -1,10 +1,13 @@
 
+using System;
 using System.Collections.Generic;
+using System.Threading.Channels;
 using TicTacToe;
 using TicTacToe.Input;
 using TicTacToeTests.Input;
-using TicTacToeTests.Output;
 using Xunit;
+using Xunit.Sdk;
+using TestOutput = TicTacToeTests.Output.TestOutput;
 
 namespace TicTacToeTests
 {
@@ -129,7 +132,7 @@ namespace TicTacToeTests
         [InlineData(Location.TopLeft, Location.TopMid, Location.TopRight, true)]
         [InlineData(Location.MidLeft, Location.Centre, Location.MidRight, true)]
         [InlineData(Location.TopLeft, Location.MidLeft, Location.BottomLeft, false)]
-        public void CheckForHorizontalWin(Location loc1, Location loc2, Location loc3, bool expected)
+        public void CheckForHorizontalWin_ShouldReturnTrueOnThreeInARow(Location loc1, Location loc2, Location loc3, bool expected)
         {
             ConsoleInput input = new ConsoleInput();
             Game game = new Game(_display, input, _processor);
@@ -146,7 +149,7 @@ namespace TicTacToeTests
         [InlineData(Location.TopLeft, Location.MidLeft, Location.BottomLeft, true)]
         [InlineData(Location.TopRight, Location.MidRight, Location.BottomRight, true)]
         [InlineData(Location.TopLeft, Location.TopMid, Location.TopRight, false)]
-        public void CheckForVerticalWin(Location loc1, Location loc2, Location loc3, bool expected)
+        public void CheckForVerticalWin_ShouldReturnTrueOnThreeInARow(Location loc1, Location loc2, Location loc3, bool expected)
         {
             ConsoleInput input = new ConsoleInput();
             Game game = new Game(_display, input, _processor);
@@ -163,7 +166,7 @@ namespace TicTacToeTests
         [InlineData(Location.TopLeft, Location.Centre, Location.BottomRight, true)]
         [InlineData(Location.TopRight, Location.Centre, Location.BottomLeft, true)]
         [InlineData(Location.TopLeft, Location.TopMid, Location.TopRight, false)]
-        public void CheckForDiagonalWin(Location loc1, Location loc2, Location loc3, bool expected)
+        public void CheckForDiagonalWin_ShouldReturnTrueOnThreeInARow(Location loc1, Location loc2, Location loc3, bool expected)
         {
             ConsoleInput input = new ConsoleInput();
             Game game = new Game(_display, input, _processor);
@@ -181,7 +184,7 @@ namespace TicTacToeTests
         [InlineData(Location.TopRight, Location.MidRight, Location.BottomRight, true)]
         [InlineData(Location.TopLeft, Location.TopMid, Location.TopRight, true)]
         [InlineData(Location.TopLeft, Location.Centre, Location.BottomLeft, false)]
-        public void CheckForWin(Location loc1, Location loc2, Location loc3, bool expected)
+        public void CheckForWin_ShouldReturnTrueOnThreeInARow(Location loc1, Location loc2, Location loc3, bool expected)
         {
             ConsoleInput input = new ConsoleInput();
             Game game = new Game(_display, input, _processor);
@@ -202,6 +205,62 @@ namespace TicTacToeTests
             Player expected = game.Player1;
 
             Player actual = game.GetCurrentPlayer();
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void CheckForDraw_GivenFullBoardWithNoWinners_ReturnsTrue()
+        {
+            ConsoleInput input = new ConsoleInput();
+            Game game = new Game(_display, input, _processor);
+            game.Board.PlacePiece(Location.TopLeft, Token.Cross);
+            game.Board.PlacePiece(Location.TopMid, Token.Naught);
+            game.Board.PlacePiece(Location.TopRight, Token.Cross);
+            game.Board.PlacePiece(Location.MidLeft, Token.Naught);
+            game.Board.PlacePiece(Location.Centre, Token.Naught);
+            game.Board.PlacePiece(Location.MidRight, Token.Cross);
+            game.Board.PlacePiece(Location.BottomLeft, Token.Cross);
+            game.Board.PlacePiece(Location.BottomMid, Token.Cross);
+            game.Board.PlacePiece(Location.BottomRight, Token.Naught);
+            bool expected = true;
+            
+            bool actual = game.CheckForDraw();
+            
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void CheckForDraw_GivenUnfinishedBoard_ReturnsFalse()
+        {
+            ConsoleInput input = new ConsoleInput();
+            Game game = new Game(_display, input, _processor);
+            game.Board.PlacePiece(Location.TopLeft, Token.Cross);
+            game.Board.PlacePiece(Location.TopMid, Token.Naught);
+            game.Board.PlacePiece(Location.TopRight, Token.Cross);
+            game.Board.PlacePiece(Location.MidLeft, Token.Naught);
+            game.Board.PlacePiece(Location.Centre, Token.Naught);
+            game.Board.PlacePiece(Location.MidRight, Token.Cross);
+            game.Board.PlacePiece(Location.BottomLeft, Token.Cross);
+            game.Board.PlacePiece(Location.BottomMid, Token.Cross);
+            bool expected = false;
+
+            bool actual = game.CheckForDraw();
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void CheckForGameEnd_GivenBoardWithWin_ReturnsTrue()
+        {
+            ConsoleInput input = new ConsoleInput();
+            Game game = new Game(_display, input, _processor);
+            game.Board.PlacePiece(Location.TopLeft, Token.Cross);
+            game.Board.PlacePiece(Location.TopMid, Token.Cross);
+            game.Board.PlacePiece(Location.TopRight, Token.Cross);
+            bool expected = true;
+
+            bool actual = game.CheckForGameEnd();
 
             Assert.Equal(expected, actual);
         }

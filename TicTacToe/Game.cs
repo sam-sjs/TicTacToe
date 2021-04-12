@@ -1,5 +1,6 @@
 
 using System.Linq;
+using System.Threading.Tasks.Dataflow;
 using TicTacToe.Input;
 
 namespace TicTacToe
@@ -38,11 +39,17 @@ namespace TicTacToe
 
         private void AlternateTurns() // This seems insane to try and test, without testing an entire game of inputs and outputs it will just hang in the loop
         {
-            while (!CheckForWin())
+            while (!CheckForGameEnd())
             {
                 TakeTurn(GetCurrentPlayer());
                 _gameTurn++;
             }
+        }
+
+        public bool CheckForGameEnd()
+        {
+            return CheckForWin() ||
+                   CheckForDraw();
         }
 
         public bool CheckForWin()
@@ -76,6 +83,11 @@ namespace TicTacToe
         {
             return CheckLineForWin(Board.GetTopLeftToBottomRightLine()) ||
                    CheckLineForWin(Board.GetTopRightToBottomLeftLine());
+        }
+
+        public bool CheckForDraw()
+        {
+            return Board.Cells.All(cell => cell.Token != Token.Empty);
         }
 
         private void TakeTurn(Player player)
