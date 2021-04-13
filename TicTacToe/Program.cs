@@ -13,7 +13,8 @@ namespace TicTacToe
             ConsoleInput input = new ConsoleInput();
             CoordinateProcessor processor = new CoordinateProcessor();
             Game game = new Game(display, input, processor);
-            game.Play();
+            Controller controller = new Controller(display);
+            controller.Play();
         }
     }
 }

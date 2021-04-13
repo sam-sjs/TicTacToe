@@ -1,12 +1,9 @@
 
-using System;
 using System.Collections.Generic;
-using System.Threading.Channels;
 using TicTacToe;
 using TicTacToe.Input;
 using TicTacToeTests.Input;
 using Xunit;
-using Xunit.Sdk;
 using TestOutput = TicTacToeTests.Output.TestOutput;
 
 namespace TicTacToeTests
@@ -15,10 +12,10 @@ namespace TicTacToeTests
     {
         private readonly Display _display;
         private readonly CoordinateProcessor _processor;
+        private readonly TestOutput _output = new TestOutput();
         public GameTests()
         {
-            TestOutput output = new TestOutput();
-            _display = new Display(output);
+            _display = new Display(_output);
             _processor = new CoordinateProcessor();
         }
 
@@ -56,38 +53,7 @@ namespace TicTacToeTests
             Assert.NotEqual(game.Player1.Token, game.Player2.Token);
         }
         
-        [Fact]
-        public void GetLocation_GivenStringCoordinates_ShouldReturnLocation()
-        {
-            List<string> inputs = new List<string> {"1,2"};
-            TestInput input = new TestInput(inputs);
-            Game game = new Game(_display, input, _processor);
-            Location expected = Location.TopMid;
-
-            Location actual = game.GetLocation();
-
-            Assert.Equal(expected, actual);
-        }
-
-        public static IEnumerable<object[]> GetInputs()
-        {
-            yield return new object[] {new List<string> {"1,Q", "1,2"}, Location.TopMid};
-            yield return new object[] {new List<string> {"Q,2", "2,3"}, Location.MidRight};
-            yield return new object[] {new List<string> {"12,2", "1,1"}, Location.TopLeft};
-            yield return new object[] {new List<string> {"1,8", "4,4", "1,2"}, Location.TopMid};
-        }
         
-        [Theory]
-        [MemberData(nameof(GetInputs))]
-        public void GetLocation_GivenInvalidCoordinates_AwaitValidCoordinates(List<string> inputs, Location expected)
-        {
-            TestInput input = new TestInput(inputs);
-            Game game = new Game(_display, input, _processor);
-
-            Location actual = game.GetLocation();
-            
-            Assert.Equal(expected, actual);
-        }
         
         [Fact]
         public void ReadLine_ShouldReturnExpectedString()
@@ -264,5 +230,102 @@ namespace TicTacToeTests
 
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void CheckForGameEnd_GivenFullBoard_ReturnsTrue()
+        {
+            ConsoleInput input = new ConsoleInput();
+            Game game = new Game(_display, input, _processor);
+            game.Board.PlacePiece(Location.TopLeft, Token.Cross);
+            game.Board.PlacePiece(Location.TopMid, Token.Naught);
+            game.Board.PlacePiece(Location.TopRight, Token.Cross);
+            game.Board.PlacePiece(Location.MidLeft, Token.Naught);
+            game.Board.PlacePiece(Location.Centre, Token.Naught);
+            game.Board.PlacePiece(Location.MidRight, Token.Cross);
+            game.Board.PlacePiece(Location.BottomLeft, Token.Cross);
+            game.Board.PlacePiece(Location.BottomMid, Token.Cross);
+            game.Board.PlacePiece(Location.BottomRight, Token.Naught);
+            bool expected = true;
+
+            bool actual = game.CheckForGameEnd();
+            
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void CheckForGameEnd_GivenNoEndCondition_ReturnsFalse()
+        {
+            ConsoleInput input = new ConsoleInput();
+            Game game = new Game(_display, input, _processor);
+            game.Board.PlacePiece(Location.Centre, Token.Cross);
+            game.Board.PlacePiece(Location.BottomMid, Token.Naught);
+            bool expected = false;
+
+            bool actual = game.CheckForGameEnd();
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void MakeMove_GivenStringInputCoords_ShouldPlaceTokenInCorrectCell()
+        {
+            ConsoleInput input = new ConsoleInput();
+            Game game = new Game(_display, input, _processor);
+            string coords = "1,2";
+            Token expected = Token.Cross;
+
+            game.MakeMove(coords);
+            Token actual = game.Board.GetCellByLocation(Location.TopMid).Token;
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ProcessUserInput_WhenInputIsCoord_PlacesTokenInCorrectCell()
+        {
+            List<string> inputs = new List<string> {"1,2"};
+            TestInput input = new TestInput(inputs);
+            Game game = new Game(_display, input, _processor);
+            Token expected = Token.Cross;
+            game.ProcessUserInput();
+            
+            Token actual = game.Board.GetCellByLocation(Location.TopMid).Token;
+
+            Assert.Equal(expected, actual);
+        }
+
+        
+        // [Fact]
+        // public void GetLocation_GivenStringCoordinates_ShouldReturnLocation()
+        // {
+        //     List<string> inputs = new List<string> {"1,2"};
+        //     TestInput input = new TestInput(inputs);
+        //     Game game = new Game(_display, input, _processor);
+        //     Location expected = Location.TopMid;
+        //
+        //     Location actual = game.GetLocation();
+        //
+        //     Assert.Equal(expected, actual);
+        // }
+        //
+        // public static IEnumerable<object[]> GetInputs()
+        // {
+        //     yield return new object[] {new List<string> {"1,Q", "1,2"}, Location.TopMid};
+        //     yield return new object[] {new List<string> {"Q,2", "2,3"}, Location.MidRight};
+        //     yield return new object[] {new List<string> {"12,2", "1,1"}, Location.TopLeft};
+        //     yield return new object[] {new List<string> {"1,8", "4,4", "1,2"}, Location.TopMid};
+        // }
+        //
+        // [Theory]
+        // [MemberData(nameof(GetInputs))]
+        // public void GetLocation_GivenInvalidCoordinates_AwaitValidCoordinates(List<string> inputs, Location expected)
+        // {
+        //     TestInput input = new TestInput(inputs);
+        //     Game game = new Game(_display, input, _processor);
+        //
+        //     Location actual = game.GetLocation();
+        //     
+        //     Assert.Equal(expected, actual);
+        // }
     }
 }
