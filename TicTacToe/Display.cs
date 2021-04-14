@@ -18,9 +18,9 @@ namespace TicTacToe
             _output.WriteLine(Messages.AnnounceBoard);
         }
 
-        public void Board(Board board)
+        public void Board(string board)
         {
-            _output.WriteLine(board.ToString());
+            _output.WriteLine(board);
         }
 
         public void AskForCoordinates(Player player)
