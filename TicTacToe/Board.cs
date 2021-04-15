@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace TicTacToe
 {
@@ -104,6 +105,11 @@ namespace TicTacToe
                 GetCellByLocation(Location.Centre).Token,
                 GetCellByLocation(Location.BottomLeft).Token
             };
+        }
+
+        public Token[] GetFullBoard()
+        {
+            return GetTopLine().Concat(GetHorizontalMidLine().Concat(GetBottomLine())).ToArray();
         }
         
         public override string ToString()

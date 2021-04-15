@@ -1,18 +1,20 @@
 using TicTacToe.Input;
+using TicTacToe.Game;
 
 namespace TicTacToe
 {
     public class Controller
     {
+        private const string QuitKey = "q";
         private readonly Display _display;
         private readonly IInput _input;
-        private readonly Game.Game _game; // Google convention
+        private readonly TicTacToeGame _ticTacToeGame;
         private readonly CoordinateProcessor _processor;
-        public Controller(Display display,  IInput input, Game.Game game, CoordinateProcessor processor)
+        public Controller(Display display,  IInput input, TicTacToeGame ticTacToeGame, CoordinateProcessor processor)
         {
             _display = display;
             _input = input;
-            _game = game;
+            _ticTacToeGame = ticTacToeGame;
             _processor = processor;
         }
 
@@ -26,21 +28,21 @@ namespace TicTacToe
         private void DisplayOpeningMessages()
         {
             _display.Welcome();
-            _display.Board(_game.GetBoardDisplay());
+            _display.Board(_ticTacToeGame.GetBoardDisplay());
         }
 
         private void AlternateTurns()
         {
-            while (!_game.IsGameEnded())
+            while (!_ticTacToeGame.IsGameEnded())
             {
                 TakeTurn();
-                _game.Turn++;
+                _ticTacToeGame.Turn++;
             }
         }
 
         private void TakeTurn()
         {
-            _display.AskForCoordinates(_game.GetCurrentPlayer());
+            _display.AskPlayerForCoordinates(_ticTacToeGame.GetCurrentPlayer());
             ProcessUserInput();
         }
 
@@ -49,9 +51,9 @@ namespace TicTacToe
             while (true)
             {
                 string input = _input.ReadLine();
-                if (input == "q")
+                if (input == QuitKey)
                 {
-                    _game.PlayerHasQuit = true;
+                    _ticTacToeGame.PlayerHasQuit = true;
                     break;
                 }
 
@@ -67,9 +69,9 @@ namespace TicTacToe
 
         private void AdvanceTurn(string input)
         {
-            _game.MakeMove(_processor.ConvertCoordinates(input));
+            _ticTacToeGame.MakeMove(_processor.ConvertCoordinates(input));
             _display.MoveAccepted();
-            _display.Board(_game.GetBoardDisplay());
+            _display.Board(_ticTacToeGame.GetBoardDisplay());
         }
     }
 }

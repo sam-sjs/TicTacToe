@@ -55,7 +55,7 @@ namespace TicTacToeTests
             Display newMessage = new Display(output);
             
 
-            newMessage.AskForCoordinates(player);
+            newMessage.AskPlayerForCoordinates(player);
             
             Assert.Equal(expected, output.Messages);
         }

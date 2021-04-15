@@ -182,5 +182,29 @@ namespace TicTacToeTests
 
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void GetFullBoard_ShouldReturnArrayOfAllBoardTokens()
+        {
+            Board board = new Board();
+            board.PlacePiece(Location.TopLeft, Token.Cross);
+            board.PlacePiece(Location.TopMid, Token.Naught);
+            board.PlacePiece(Location.TopRight, Token.Cross);
+            board.PlacePiece(Location.MidLeft, Token.Naught);
+            board.PlacePiece(Location.Centre, Token.Empty);
+            board.PlacePiece(Location.MidRight, Token.Empty);
+            board.PlacePiece(Location.BottomLeft, Token.Empty);
+            board.PlacePiece(Location.BottomMid, Token.Empty);
+            board.PlacePiece(Location.BottomRight, Token.Empty);
+            Token[] expected = new Token[]
+            {
+                Token.Cross, Token.Naught, Token.Cross, Token.Naught, Token.Empty,
+                Token.Empty, Token.Empty, Token.Empty, Token.Empty
+            };
+
+            Token[] actual = board.GetFullBoard();
+            
+            Assert.Equal(expected, actual);
+        }
     }
 }

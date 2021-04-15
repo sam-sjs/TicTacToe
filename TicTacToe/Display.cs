@@ -23,7 +23,7 @@ namespace TicTacToe
             _output.WriteLine(board);
         }
 
-        public void AskForCoordinates(Player player)
+        public void AskPlayerForCoordinates(Player player)
         {
 
             _output.WriteLine(Messages.AskForCoords, player.Name, player.Token.ToString());
