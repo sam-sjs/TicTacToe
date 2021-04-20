@@ -22,7 +22,7 @@ namespace TicTacToe
         {
             DisplayOpeningMessages();
             AlternateTurns();
-            
+            DisplayClosingMessage();
         }
 
         private void DisplayOpeningMessages()
@@ -72,6 +72,12 @@ namespace TicTacToe
             _ticTacToeGame.MakeMove(_processor.ConvertCoordinates(input));
             _display.MoveAccepted();
             _display.Board(_ticTacToeGame.GetBoardDisplay());
+        }
+
+        private void DisplayClosingMessage()
+        {
+            if (_ticTacToeGame.IsGameWon()) _display.Winner();
+            if (_ticTacToeGame.IsGameADraw()) _display.GameDrawn();
         }
     }
 }

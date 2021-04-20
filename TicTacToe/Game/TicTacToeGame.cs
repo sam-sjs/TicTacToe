@@ -24,7 +24,7 @@ namespace TicTacToe.Game
                    PlayerHasQuit;
         }
 
-        private bool IsGameWon()
+        public bool IsGameWon()
         {
             return IsWinningHorizontal() ||
                    IsWinningVertical() ||
@@ -57,7 +57,7 @@ namespace TicTacToe.Game
                    IsWinningLine(_board.GetTopRightToBottomLeftLine());
         }
 
-        private bool IsGameADraw()
+        public bool IsGameADraw()
         {
             return _board.GetFullBoard().All(token => token != Token.Empty);
         }

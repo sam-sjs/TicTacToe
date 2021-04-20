@@ -31,17 +31,13 @@ namespace TicTacToe
 
         public override string ToString()
         {
-            switch (Token)
+            return Token switch
             {
-                case Token.Cross:
-                    return "X";
-                case Token.Naught:
-                    return "0";
-                case Token.Empty:
-                    return ".";
-                default:
-                    return ".";
-            }
+                Token.Cross => "X",
+                Token.Naught => "0",
+                Token.Empty => ".",
+                _ => "."
+            };
         }
     }
 }

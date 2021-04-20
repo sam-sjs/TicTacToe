@@ -43,5 +43,10 @@ namespace TicTacToe
         {
             _output.WriteLine(Messages.Winner);
         }
+
+        public void GameDrawn()
+        {
+            _output.WriteLine(Messages.GameDrawn);
+        }
     }
 }

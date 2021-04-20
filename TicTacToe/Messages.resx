@@ -34,6 +34,9 @@
         <value>Move accepted, here's the current board:</value>
     </data>
     <data name="Winner" xml:space="preserve">
-        <value>Move accepted, well done you've won the game!</value>
+        <value>Congratulations you've won the game!</value>
+    </data>
+    <data name="GameDrawn" xml:space="preserve">
+        <value>The game ends in a draw, both players are losers!</value>
     </data>
 </root>

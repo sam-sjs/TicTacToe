@@ -87,11 +87,23 @@ namespace TicTacToeTests
         [Fact]
         public void Winner_ShouldHaveCorrectMessage()
         {
-            List<string> expected = new List<string> {"Move accepted, well done you've won the game!"};
+            List<string> expected = new List<string> {"Congratulations you've won the game!"};
             TestOutput output = new TestOutput();
             Display newMessage = new Display(output);
 
             newMessage.Winner();
+            
+            Assert.Equal(expected, output.Messages);
+        }
+
+        [Fact]
+        public void GameDrawn_ShouldHaveCorrectMessage()
+        {
+            List<string> expected = new List<string> {"The game ends in a draw, both players are losers!"};
+            TestOutput output = new TestOutput();
+            Display newMessage = new Display(output);
+
+            newMessage.GameDrawn();
             
             Assert.Equal(expected, output.Messages);
         }

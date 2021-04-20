@@ -80,5 +80,11 @@ namespace TicTacToe {
                 return ResourceManager.GetString("Winner", resourceCulture);
             }
         }
+        
+        internal static string GameDrawn {
+            get {
+                return ResourceManager.GetString("GameDrawn", resourceCulture);
+            }
+        }
     }
 }
