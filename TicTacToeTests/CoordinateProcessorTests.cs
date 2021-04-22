@@ -13,7 +13,7 @@ namespace TicTacToeTests
         {
             CoordinateProcessor processor = new CoordinateProcessor();
 
-            bool actual = processor.ValidateCoordinates(input);
+            bool actual = processor.IsCoordinateValid(input);
             
             Assert.Equal(expected, actual);
         }
@@ -25,7 +25,7 @@ namespace TicTacToeTests
             string input = "1,2";
             Location expected = Location.TopMid;
 
-            Location actual = processor.ConvertCoordinates(input);
+            Location actual = processor.ConvertCoordinate(input);
 
             Assert.Equal(expected, actual);
         }

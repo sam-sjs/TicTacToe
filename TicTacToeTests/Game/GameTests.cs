@@ -18,10 +18,6 @@ namespace TicTacToeTests.Game
             _player2 = new Player("Player 2", Token.Naught);
         }
         
-        // Need to answer whether I should hide Player from Controller to decide how to handle these tests.  If Player
-        // is hidden by changing GetCurrentPlayer() to return strings.  If not hiding Player then easiest to make Player
-        // a public property again.  This would also solve the problem with test 3 "PlayersShouldHaveUniqueTokens".
-        
         [Fact]
         public void Game_ShouldHavePlayer1()
         {
@@ -110,6 +106,29 @@ namespace TicTacToeTests.Game
             Token actual = _board.GetCellByLocation(Location.TopMid).Token;
 
             Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void IsCellEmpty_GivenLocationOfEmptyCell_ReturnsTrue()
+        {
+            TicTacToeGame ticTacToeGame = new TicTacToeGame(_board, _player1, _player2);
+            Location coordsToCheck = Location.Centre;
+
+            bool actual = ticTacToeGame.IsCellEmpty(coordsToCheck);
+            
+            Assert.True(actual);
+        }
+
+        [Fact]
+        public void IsCellEmpty_GivenLocationOfNonEmptyCell_ReturnsFalse()
+        {
+            _board.PlacePiece(Location.TopLeft, Token.Cross);
+            TicTacToeGame ticTacToeGame = new TicTacToeGame(_board, _player1, _player2);
+            Location coordsToCheck = Location.TopLeft;
+
+            bool actual = ticTacToeGame.IsCellEmpty(coordsToCheck);
+            
+            Assert.False(actual);
         }
     }
 }

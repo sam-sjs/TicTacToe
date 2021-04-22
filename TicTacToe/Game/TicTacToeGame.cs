@@ -76,5 +76,10 @@ namespace TicTacToe.Game
         {
             return _board.ToString();
         }
+
+        public bool IsCellEmpty(Location location)
+        {
+            return _board.GetCellByLocation(location).Token == Token.Empty;
+        }
     }
 }

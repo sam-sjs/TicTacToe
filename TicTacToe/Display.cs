@@ -29,9 +29,9 @@ namespace TicTacToe
             _output.WriteLine(Messages.AskForCoords, player.Name, player.Token.ToString());
         }
 
-        public void InvalidCoordinates()
+        public void InvalidInput()
         {
-            _output.WriteLine(Messages.InvalidCoords);
+            _output.WriteLine(Messages.InvalidInput);
         }
  
         public void MoveAccepted()

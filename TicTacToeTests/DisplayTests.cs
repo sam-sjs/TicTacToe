@@ -67,7 +67,7 @@ namespace TicTacToeTests
             TestOutput output = new TestOutput();
             Display newMessage = new Display(output);
 
-            newMessage.InvalidCoordinates();
+            newMessage.InvalidInput();
             
             Assert.Equal(expected, output.Messages);
         }

@@ -63,9 +63,9 @@ namespace TicTacToe {
             }
         }
         
-        internal static string InvalidCoords {
+        internal static string InvalidInput {
             get {
-                return ResourceManager.GetString("InvalidCoords", resourceCulture);
+                return ResourceManager.GetString("InvalidInput", resourceCulture);
             }
         }
         

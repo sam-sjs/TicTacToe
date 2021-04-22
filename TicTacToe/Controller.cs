@@ -43,33 +43,40 @@ namespace TicTacToe
         private void TakeTurn()
         {
             _display.AskPlayerForCoordinates(_ticTacToeGame.GetCurrentPlayer());
-            ProcessUserInput();
+            ProcessUserInput(GetValidInput());
         }
 
-        private void ProcessUserInput()
+        private string GetValidInput()
         {
+            string input;
             while (true)
             {
-                string input = _input.ReadLine();
-                if (input == QuitKey)
-                {
-                    _ticTacToeGame.PlayerHasQuit = true;
-                    break;
-                }
-
-                if (_processor.ValidateCoordinates(input))
-                {
-                    AdvanceTurn(input);
-                    break;
-                }
-                
-                _display.InvalidCoordinates();
+                input = _input.ReadLine();
+                if (IsInputValid(input)) break;
+                _display.InvalidInput();
             }
+
+            return input;
+        }
+
+        private bool IsInputValid(string input)
+        {
+            return _processor.IsCoordinateValid(input) &&
+                   _ticTacToeGame.IsCellEmpty(_processor.ConvertCoordinate(input));
+        }
+
+        private void ProcessUserInput(string input)
+        {
+            if (input == QuitKey)
+            {
+                _ticTacToeGame.PlayerHasQuit = true;
+            }
+            AdvanceTurn(input);
         }
 
         private void AdvanceTurn(string input)
         {
-            _ticTacToeGame.MakeMove(_processor.ConvertCoordinates(input));
+            _ticTacToeGame.MakeMove(_processor.ConvertCoordinate(input));
             _display.MoveAccepted();
             _display.Board(_ticTacToeGame.GetBoardDisplay());
         }

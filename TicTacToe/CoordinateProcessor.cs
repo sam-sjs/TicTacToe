@@ -13,12 +13,12 @@ namespace TicTacToe
             {"3,1", Location.BottomLeft}, {"3,2", Location.BottomMid}, {"3,3", Location.BottomRight}
         };
 
-        public bool ValidateCoordinates(string coords)
+        public bool IsCoordinateValid(string coords)
         {
             return Regex.IsMatch(coords, CoordinatePattern);
         }
         
-        public Location ConvertCoordinates(string coords)
+        public Location ConvertCoordinate(string coords)
         {
             return _locationTable[coords];
         }
